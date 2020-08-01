@@ -8,7 +8,7 @@ import { observe } from './components/Game'
 const root = document.getElementById('root')
 
 observe((knightPosition) =>
-  ReactDOM.render(<Board knightPosition={knightPosition} />,root)
+  ReactDOM.render(<Board knightPosition={knightPosition} />, root)
 )
 
 // If you want your app to work offline and load faster, you can change

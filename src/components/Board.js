@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Knight from './Knight'
 import Square from './Square'
+import { canMoveKnight, moveKnight } from './Game'
 
 const Board = ({ knightPosition }) => {
   const [squares, setSquares] = useState([])
@@ -11,7 +12,13 @@ const Board = ({ knightPosition }) => {
       spaces.push(renderSquare(i, knightPosition))
     }
     setSquares(spaces)
-  }, [])
+  }, [knightPosition])
+
+  const handleSquareClick = (toX, toY) => {
+    if (canMoveKnight(toX, toY)) {
+      moveKnight(toX, toY)
+    }
+  }
 
   const renderSquare = (i, [knightX, knightY]) => {
     const x = i % 8
@@ -21,7 +28,11 @@ const Board = ({ knightPosition }) => {
     const piece = isKnightHere ? <Knight /> : null
 
     return (
-      <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
+      <div
+        key={i}
+        style={{ width: '12.5%', height: '12.5%' }}
+        onClick={() => handleSquareClick(x, y)}
+      >
         <Square black={black}>{piece}</Square>
       </div>
     )
