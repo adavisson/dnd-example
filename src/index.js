@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import Board from './components/Board'
 import * as serviceWorker from './serviceWorker'
+import { observe } from './components/Game'
 
-ReactDOM.render(
-  <Board knightPosition={[3, 5]} />,
-  document.getElementById('root')
+const root = document.getElementById('root')
+
+observe((knightPosition) =>
+  ReactDOM.render(<Board knightPosition={knightPosition} />,root)
 )
 
 // If you want your app to work offline and load faster, you can change
