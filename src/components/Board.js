@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import Knight from './Knight'
 import Square from './Square'
 
 const Board = ({ knightPosition }) => {
+  const [squares, setSquares] = useState([])
 
-  const renderSquare = (x, y, [knightX, knightY]) => {
-    const black = (x + y) % 2 === 1
+  useEffect(() => {
+    const spaces = []
+    for (let i = 0; i < 64; i++) {
+      spaces.push(renderSquare(i, knightPosition))
+    }
+    setSquares(spaces)
+  }, [])
+
+  const renderSquare = (i, [knightX, knightY]) => {
+    const x = i % 8
+    const y = Math.floor(i / 8)
     const isKnightHere = knightX === x && knightY === y
+    const black = (x + y) % 2 === 1
     const piece = isKnightHere ? <Knight /> : null
 
-    return <Square black={black}>{piece}</Square>
+    return (
+      <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
+        <Square black={black}>{piece}</Square>
+      </div>
+    )
   }
 
   return (
-    <div style={{width: '100%', height: '100%'}}>
-      {renderSquare(0, 0, knightPosition)}
-      {renderSquare(1, 0, knightPosition)}
-      {renderSquare(2, 0, knightPosition)}
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        flexWrap: 'wrap',
+      }}
+    >
+      {squares}
     </div>
-  );
+  )
 }
- 
-export default Board;
+
+export default Board

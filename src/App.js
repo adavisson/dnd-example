@@ -4,7 +4,7 @@ import Board from './components/Board'
 
 function App() {
   return (
-    <Board knightPosition={[0,0]}/>
+    <Board knightPosition={[6, 4]}/>
   )
 }
 
