@@ -1,12 +1,13 @@
 import React from 'react'
 import './App.css'
 import Knight from './components/Knight'
+import Square from './components/Square'
 
 function App() {
   return (
-    <div className='App'>
+    <Square black>
       <Knight />
-    </div>
+    </Square>
   )
 }
 
